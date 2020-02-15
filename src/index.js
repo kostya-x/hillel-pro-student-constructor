@@ -1,7 +1,7 @@
 'use strict';
 
 // eslint-disable-next-line no-unused-vars
-function student(name, surename, birthYear) {
+function Student(name, surename, birthYear) {
   const date = new Date;
   const lessonsAmount = 30;
   const attendance = new Array(lessonsAmount);
