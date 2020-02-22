@@ -14,30 +14,25 @@ function Student(name, surename, birthYear) {
   this.age = () => date.getFullYear() - birthYear;
 
   this.present = () => {
-    for (let i = 0; i < attendance.length; i++) {
-      if (typeof attendance[i] === 'undefined') {
-        return attendance[i] = true;
-      }
-    }
+    const index = attendance.findIndex((item) => typeof item === 'undefined');
+
+    return attendance[index] = true;
   };
 
   this.absent = () => {
-    for (let i = 0; i < attendance.length; i++) {
-      if (typeof attendance[i] === 'undefined') {
-        return attendance[i] = false;
-      }
-    }
+    const index = attendance.findIndex((item) => typeof item === 'undefined');
+
+    return attendance[index] = false;
   };
 
   this.mark = (mark) => {
     const minMark = 0;
     const maxMark = 10;
+
     if (mark >= minMark && mark <= maxMark) {
-      for (let i = 0; i < marks.length; i++) {
-        if (typeof marks[i] === 'undefined') {
-          return marks[i] = mark;
-        }
-      }
+      const index = marks.findIndex((item) => typeof item === 'undefined');
+
+      return marks[index] = mark;
     }
   };
 
@@ -45,28 +40,16 @@ function Student(name, surename, birthYear) {
     const goodMarks = 9;
     const goodAttendance = 0.9;
 
-    const averageMark = function() {
-      let avgMark = 0;
+    const averageMark = () => {
+      const filteredMakrs = marks.filter((item) => typeof item !== 'undefined');
 
-      for (let i = 0; i < marks.length; i++) {
-        if (typeof marks[i] === 'undefined') {
-          return avgMark /= i;
-        } else {
-          avgMark += marks[i];
-        }
-      }
+      return filteredMakrs.reduce((acc, cur) => acc + cur) / filteredMakrs.length;
     };
 
     const averageAttendance = () => {
-      let avgAttendance = 0;
+      const filteredAttendance = attendance.filter((item) => typeof item !== 'undefined');
 
-      for (let i = 0; i < attendance.length; i++) {
-        if (typeof attendance[i] === 'undefined') {
-          return avgAttendance /= i;
-        } else {
-          avgAttendance += +attendance[i];
-        }
-      }
+      return filteredAttendance.reduce((acc, cur) => acc + +cur) / filteredAttendance.length;
     };
 
     if (averageMark() > goodMarks && averageAttendance() > goodAttendance) {
